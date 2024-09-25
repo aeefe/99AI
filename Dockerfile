@@ -1,29 +1,30 @@
-# 编译阶段
-FROM node:18-alpine AS base
-FROM base AS build
-WORKDIR /app
-COPY package.json ./
+FROM node:20 AS build
 
-# 使用腾讯源（国内服务器可取消下方注释以提升安装速度）
-# RUN npm config set registry https://mirrors.cloud.tencent.com/npm/
+COPY . /app
 
-# 如遇到提示网站证书无效，取消下方注释，禁止严格SS策略
-# RUN npm config set strict-ssl false
-
-# 使用淘宝源安装项目依赖（国内用户居多）
-RUN npm config set registry https://registry.npmmirror.com && \
-    npm install --omit=dev
-
-
-# 运行阶段
-FROM base AS runner
-ENV TZ="Asia/Shanghai"
+# RUN yarn config set registry https://mirrors.cloud.tencent.com/npm/
 
 WORKDIR /app
+RUN yarn install && yarn run build
 
-COPY --from=build /app/node_modules ./node_modules
-COPY . .
+WORKDIR /app/web
+RUN yarn install && yarn run build
 
-EXPOSE 9520
+FROM node:20-alpine
+WORKDIR /app
 
-CMD ["node", "./dist/main.js"]
+# Install dotenvx
+RUN curl -fsS https://dotenvx.sh/ | sh
+
+COPY .env /app
+
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/backend ./backend
+COPY --from=build /app/web/build ./web/build
+COPY --from=build /app/package.json ./
+
+# RUN yarn config set registry https://mirrors.cloud.tencent.com/npm/
+RUN yarn install --production && yarn cache clean
+
+EXPOSE 3000
+CMD yarn run start

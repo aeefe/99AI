@@ -1,297 +1,182 @@
-# 99 AI 稳定版
+# Search with AI
 
-基于 NineAI 2.4.2 二开的可商业化 AI Web 应用，已编译为前后端整合包，支持快速部署。
+**English** [中文](./README_CN.md)  
 
-旨在提供一个易部署的集成化人工智能服务站点。
+```Updated: 2024/09/17```
 
-## 版本说明
+Build your own conversation-based search with AI, a simple implementation with Node.js & Vue3. [Live Demo](https://isou.chat/)  
 
-| 特性 | 稳定版 | 开发版 |
-| :--- | :--- | :--- |
-| 项目功能 | 详见项目介绍 | 有一定的保留功能 |
-| 更新频率 | 月更 | 周更 |
-| 商用许可 | 可直接商用 | 可直接商用 |
-| 部署方式 | Node.js / Docker-compose | Node.js / Docker-compose |
-| 编译状态 | 前端混淆编译，后端非混淆编译 | 前端混淆编译，后端非混淆编译 |
-| 未编译源码 | 暂不开源 | 暂不开源 |
-| 授权要求 | 无需授权 | 无需授权 |
-| 获取方式 | 本项目即为稳定版 | 赞助获取 |
+<div align="center">
+ <img src="./assets/screenshot.jpg"></img>
+</div>
 
-## 项目介绍
+repo: [GitHub](https://github.com/yokingma/search_with_ai)、 [Gitee](https://gitee.com/zac_ma/search_with_ai)  
 
-**应用广场**
+## Features
 
-![应用广场](https://github.com/vastxie/99AI/assets/24899308/2cbeab33-0b6b-4f56-81a6-1e15e097023f)
+* Built-in support for LLM: OpenAI, Google, Lepton, DeepSeek, Ollama(local)
+* Built-in support for search engine: Bing, Google, SearXNG(Free)
+* Built-in support for web search plugin: ChatGLM
+* Customizable pretty UI interface
+* Support dark mode
+* Support mobile display
+* Support Ollama, [LMStudio](https://github.com/lmstudio-ai/lms)
+* Support i18n
+* Support Continue Q&A with contexts.
+* Support Cache results, Force reload.
+* Support images search.
 
-**AI 绘画**
+## Deploy with Docker (recommended)
 
-![AI 绘画](https://github.com/vastxie/99AI/assets/24899308/1155d39a-aeed-481e-9f80-127500bf59e7)
+[Install Docker](https://docs.docker.com/install/).
 
-**AI 音乐**
+1.**Get the code.**
 
-![screenshot-1713627618821](https://github.com/vastxie/99AI/assets/24899308/f6966ae8-8be6-4ba5-8d06-c89b4c864f88)
-
-**文件分析**（开发版支持）
-
-![文件分析](https://github.com/vastxie/99AI/assets/24899308/68e80920-6b54-4a50-8b76-2c8c946e8717)
-
-**绘画广场**
-
-![绘画广场](https://github.com/vastxie/99AI/assets/24899308/4eb3954e-489d-48f6-9d9d-4de6d2fcce83)
-
-**专业绘图**
-
-![绘画页](https://github.com/vastxie/99AI/assets/24899308/148fb1fa-820c-4fe1-9dbe-e967ee41fd8b)
-
-**分销邀请**
-
-![分销推荐](https://github.com/vastxie/99AI/assets/24899308/cc280beb-d0cb-43d1-984e-4a7b3a61b807)
-
-## 更新日志
-
-### 稳定版 v3.3.0
-
-- 重构流式回复逻辑，加入错误反馈并优化用户端等待动画。
-- 调整文档显示 UI，提升视觉体验。
-- 新增 AI 回复 TTS 播报功能【后台模型管理-模型设置-添加特殊模型 `tts-1` 】。
-- 对话页新增 Dalle 绘图风格选择与连续对话绘画选项，配置入口：后台模型管理-绘画设置-Dalle 绘图配置。
-- 新增对话页 Midjourney 图片尺寸及风格选择功能。
-- 重构应用广场 UI，注意：**本次升级可能会导致应用广场图片丢失，请务必提前备份**。
-- 优化侧边栏显示，现支持应用收藏，允许同一应用开启多个对话窗口。
-- 新增 `GPTs` 适配及应用固定模型功能，需先在后台添加 `GPTs` 模型后进行设置。
-- 创意模型 【后台模型管理-模型设置-添加创意模型】现已针对以下模型特别优化：
-  - 【dalle-e-3】（OpenAI 格式）
-  - 【midjourney】（Mj-Plus 格式）
-  - 【stable-diffusion】（[LightAI API](https://api.lightai.io) 中转格式）
-  - 【suno】（[LightAI API](https://api.lightai.io) 中转格式）
-- 邮箱 SMTP 配置已迁移至后台【用户管理-邮件登录配置】，同时【基础配置】新增网页链接选项，增强发信显示效果。
-- 重构应用逻辑，翻译及导图特殊模型不再需配置，已整合至【模型管理-系统应用】。
-- 新增模型配置选项，允许设置模型调用频率限制，确保用户体验。
-
-### 开发版已/将支持
-
-- 对话页 Midjourney 绘图支持 `图生图` `人脸一致性` `风格一致性` 以及更多自定义参数选择。
-- 全模型文件分析功能（只支持带文字的 pdf，word，ppt，txt，md 等文件）。
-- 全新的插件系统——联网搜索、思维导图等 ··· ···
-- `SD3` / `SD3 Turbo` 绘图模型，`Stable Video` 图生视频模型（`stability.ai` API 格式）。
-- Azure TTS 模型支持，语音播报更生动自然。
-- 临时文件支持本地存储并自动清空。
-- 更多功能持续开发中 ··· ···
-
-<details>
-
-<summary>历史日志</summary>
-
-### v3.0.0
-
-**前端改进**
-
-  - 对话页UI重构，参考ChatGPT风格，增加美观度。
-  - 新增对话页 Midjourney 绘图功能，包括绘画进度反馈及点按操作。
-  - Dalle绘图支持模型绘画比例选择（方形/宽屏/垂直）。
-  - 绘图页面新增区域重绘功能。
-  - 全局字体优先使用系统默认，优化阅读体验。
-  - 适配ALL模型及GPTs返回图片，修正显示过大的问题。
-  - 对话页根据模型自动展示AI头像，可手动替换文件。
-
-**后台配置调整**
-
-  - 模型配置迁移到模型管理，分普通对话/绘画/特殊模型。
-  - 后台支持模型文件上传模块开关，区分ALL/4V格式。
-  - 后台新增 Midjourney 提示词优化开关及优化词配置。
-
-**注意**
-
-  - 重要：旧版 Midjourney 配置不再生效，需在模型配置绘画模型中重新配置。
-  - 模型配置支持扣除积分类型选择。
-  - 后台管理菜单重新排版，精简非必要配置。
-
-### v2.6.0
-
-1. **新增 mj-proxy-plus 支持**：支持[第三方](https://api.lightai.io)中转，添加容错和重试机制。（可联系作者获得 mj-proxy-plus 支持）。
-2. **简化模型配置流程**：精简了 Midjourney 模型的配置要求，现在用户仅需填写地址和 key 即可完成后台配置，简化了操作步骤。
-3. **新增模型排序**：引入了新的模型排序功能，优化了模型排序逻辑，以提升用户的操作体验。
-4. **DALL-E 绘图功能整合**：DALL-E 绘图功能现在可以在 Chat 组件内直接使用，DALL-E-3 模型可以在后台进行单独配置。
-5. **注意事项**：本次升级 Midjourney 对历史数据不兼容，在升级前请做好数据备份，以防数据丢失。
-
-### v2.5.0
-
-1. **GPT-4V（gpt-4-1106-vision-preview）模型识图功能**：添加了 GPT-4V 的图像识别功能，增强了模型的多媒体处理能力。
-2. **文件上传预览及显示美化**：对文件上传预览及显示进行了美化，目前仅支持 4V 和 ALL 模型。
-3. **简化模型切换逻辑**：简化了模型切换逻辑，支持更多国内模型。该功能需搭配类 OneAPI 的中转管理使用。
-4. **Chat 页面 UI 精简和美化**：对 Chat 页面进行了精简和美化。请注意，其他页面尚未进行同步优化，因此在多界面切换时可能会有一定的割裂感。后续将继续对其他页面进行优化。
-
-### v2.4.5
-
-1. 部分页面 UI 精简。
-2. 管理端地址改为 `/admin`，默认密码均设为 `123456`。
-3. 支持使用 GPT-4-All（第三方逆向）解析上传的文件、图片。
-4. 增加模型关联 Token 计费（可选）。
-5. MJ 版本默认调整为 v6.0。
-
-</details>
-
-## 安装部署
-
-安装文档可能不是非常详细，但绝对够用。如果在安装或配置中遇到任何问题，可以询问 AI、通过 [issue](https://github.com/vastxie/99AI/issues) 反馈或交流群内提问题，以获得更多帮助和支持。
-
-### Node.js 部署
-
-**1. 安装 Node.js 环境**
-
-推荐使用 `nvm` (Node Version Manager) 来安装 Node.js。
-
-- 首先，安装 `nvm`，你可以从 [nvm GitHub 仓库](https://github.com/nvm-sh/nvm) 找到安装指南。
-
-- 按照仓库中的安装说明进行操作，安装完成后，可能需要添加环境变量或重启终端。
-
-- 安装 Node.js 版本 18 或更高版本:
-  
-  ```shell
-  nvm install 18
-  nvm use 18
-  ```
-  
-- 验证 Node.js 是否安装成功:
-  
-  ```shell
-  node -v
-  ```
-
-**2. 安装 PM2 / PNPM（YARN）**
-
-- 使用 npm 安装 PM2：
-  
-  ```shell
-  npm install pm2 -g
-  ```
-  
-- 使用 npm 安装 pnpm：
-  
-  ```shell
-  npm install -g pnpm
-  ```
-  
-- 确认 `PM2` 和 `pnpm` 都已正确安装并且可以运行：
-  
-  ```
-  pm2 -v
-  pnpm -v
-  ```
-
-**3. 其他配置**
-
-- 需配置 Redis 数据库以及新建一个 MySQL 数据库。
-  
-- 配置环境变量：
-  - 复制 `.env.example` 文件为 `.env`。
-  - 根据需要修改 `.env` 文件中的配置项。
-
-**4. 安装启动**
-
-- 安装依赖：(若安装缓慢可尝试使用国内源)
-
-  ```shell
-  pnpm install
-  ```
-
-- 启动进程：（默认使用 PM2 后台运行）
-
-  ```
-  pnpm start
-  ```
-
-- 查看运行日志：
-
-  ```shell
-  pnpm logs
-  ```
-
-- 项目默认在 `9520` 端口运行，也可在环境变量中自行修改。成功运行后可通过 `IP:端口` 访问，或者配置 Nginx 反向代理，通过域名访问。
-
-### 脚本部署
-
-**1. 部署方式及功能支持**
-
-- **全新安装 99AI**
-  - 自动安装环境
-  - 拉取源码
-  - 安装依赖
-  - 使用 PM2 监控运行
-- **更新与修改配置**
-  - 自动拉取更新
-  - 自动更新程序
-  - 自定义修改配置
-- **卸载 99AI**
-- **使用 Docker 部署**
-  - 自动安装环境
-  - 自定义配置
-- **添加快捷执行脚本**
-  - 后续仅需在服务器执行 `99ai` 即可再次进入脚本
-
-**2. Shell执行脚本**
-
-```bash
-bash <(curl -sL https://js.kengro.cn/99ai/onekey-cn-99ai.sh)
+```shell
+git clone https://github.com/yokingma/search_with_ai.git
+cd search_with_ai
 ```
 
-### Docker 部署
+2.**Edit** [.env.docker](https://github.com/yokingma/search_with_ai/blob/main/.env) **file.**
 
-**1. 安装 Docker 及 Docker-compose**
+KEY is required.
 
-- 使用 [Docker 官网](https://www.docker.com/) 提供的一键安装链接安装 Docker 及 Docker-compose。
-  
-  ```bash
-  curl -fsSL https://get.docker.com | bash -s docker
-  ```
-  
-- 也可以使用其他方式自行安装 Docker 及 Docker-compose。
+```shell
+...
+# OpenAI's key & baseUrl
+OPENAI_KEY=#your key
+OPENAI_PROXY_URL=#baseURL
 
-**2. 服务管理**
+# Local llm: Ollama hostname, could modify if you need.
+OLLAMA_HOST=http://host.docker.internal:11434
 
-- **后台启动服务**
-  
-  ```shell
-  docker-compose up -d
-  ```
-  
-- **查看日志**
-  
-  ```shell
-  docker-compose logs
-  ```
-  
-- **停止服务**
-  
-  ```shell
-  docker-compose down
-  ```
-  
-- **重新构建并启动服务**
-  
-  ```shell
-  docker-compose up -d --build
-  ```
+# Searxng hostname, could modify if you need.
+SEARXNG_HOSTNAME=http://searxng:8080
+```
 
-## 项目管理
+3.**run with docker-compose.**
 
-普通管理员，可以预览后台非敏感信息，默认不激活。请使用超级管理员账号登入后台，并及时修改密码。
+```shell
+docker compose up -d
+```
 
-- **管理端地址**：`项目链接/admin`
+then visit <http://localhost:3000>
 
-- **普通管理员账号**：`admin`（默认不激活）
+4.**Update**
 
-- **超级管理员账号**：`super`
+Remember to save your **.env** settings if it has been changed before.
 
-- **密码**：`123456`
+1. run ```git pull```
+2. Delete old images using Docker Desktop or Docker CLI
+3. run ```docker compose down```
+4. run ```docker compose up -d```
 
+## LLMs
 
-## 学习交流
+#### Support
 
-扫码添加微信备注 `99`，拉交流群。（不接受私聊技术咨询，有问题优先群内交流）
+* OpenAI ChatGPT
+* Google Gemini
+* Lepton LLama2、Mixtral8*7B
+* AliYun Qwen
+* Baidu Wenxin
+* 01.ai
+* Moonshot(Kimi)
+* DeepSeek
+* ChatGLM
+* Tencent Hunyuan
+* Ollama, LMStudio
 
-<img src="https://github.com/vastxie/NineAIQuickDeploy/assets/24899308/ee20578f-063d-48d8-bff6-85ac3e38fe60" width="300">
+#### Local LLM
 
-## Star History
+Support [Ollama](https://github.com/ollama/ollama), [LMStudio](https://github.com/lmstudio-ai/lms)
 
-[![Star History Chart](https://api.star-history.com/svg?repos=vastxie/99AI&type=Date)](https://star-history.com/#vastxie/99AI&Date)
+## Search Engine
+
+Built-in support for search engine: Bing, Google, SearXNG
+
+#### SearXNG (Free, No Key required)
+
+install [SearXNG](https://github.com/searxng/searxng) with [searxng-docker](https://github.com/searxng/searxng-docker)
+> SearXNG is a free internet metasearch engine which aggregates results from various search services and databases. The service does not track or profile its users, providing online anonymity for those who seek it. Additionally, SearXNG can be used over Tor for online anonymity.
+
+When you install SearxNG, the only active output format by default is the HTML format. You need to activate the json format to use the API. This can be done by adding the following line to the settings.yml file:
+
+```yaml
+search:
+    formats:
+        - html
+        - json
+```
+
+And set limiter to false:
+
+```yaml
+server:
+   limiter: false # default is true
+```
+
+You can also set the host in .env:
+
+```shell
+# SEARXNG_HOSTNAME=<host>
+```
+
+#### Bing Search
+
+To use the Bing Web Search API, please visit [this link](https://www.microsoft.com/en-us/bing/apis/bing-web-search-api) to obtain your Bing subscription key.
+> The Bing Search API is billed, but has a free tier of 1000 calls per month.
+
+#### Google Search
+
+You have three options for Google Search: you can use the SearchApi Google Search API from [SearchApi](https://www.searchapi.io/), [Serper](https://www.serper.dev/) Google Search API from Serper, or opt for the [Programmable Search Engine](https://developers.google.com/custom-search) provided by Google.
+
+#### ChatGLM Web Search
+
+[2024/09/17] Added Zhipu AI's ChatGLM Web Search plugin, used as a Chinese search engine.
+> Zhipu AI's glm-flash is currently free, and its Web Search plugin is also free. Based on these two, ChatGLM has been added as a free Chinese search engine.
+
+## Setup
+
+Required:
+> Node.js >= 20
+
+* **Server**
+
+```shell
+yarn install && yarn run build
+```
+
+* **Web**
+
+```shell
+cd web && yarn install && yarn run build
+```
+
+* **Config(.env)**
+
+[.env](https://github.com/yokingma/search_with_ai/blob/main/.env) is the project configuration file. Please configure it according to your requirements.
+
+[.env.docker](https://github.com/yokingma/search_with_ai/blob/main/.env.docker) is for docker deployment.
+
+* **Run**
+In the root of the project:
+
+```shell
+yarn run start 
+```
+
+* **Update**
+In the root of the project:
+
+```shell
+git pull
+yarn install
+cd web && yarn install && yarn run build
+```
+
+Now you can visit <http://localhost:3000>
+
+<div align="center">
+ <img src="./assets/qrcode.jpg"></img>
+</div>
